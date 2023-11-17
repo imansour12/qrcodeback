@@ -6,12 +6,14 @@ from dotenv import load_dotenv
 from bson import ObjectId
 import spacy
 import os
+import spacy.cli
 
 load_dotenv()
 client = MongoClient(os.getenv('CONNECT_STRING'))
 db = client['docinfo']
 collection = db['docinfo']
 app = FastAPI()
+spacy.cli.download("en_core_web_sm")
 nlp = spacy.load('en_core_web_sm')
 
 app.add_middleware(
